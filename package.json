@@ -1,0 +1,52 @@
+{
+	"name": "@thinairthings/cli",
+	"version": "0.0.1",
+	"license": "MIT",
+	"bin": {
+		"crater": "dist/cli.js"
+	},
+	"type": "module",
+	"engines": {
+		"node": ">=16"
+	},
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsc --watch",
+		"npmpub": "npm run build && git add . && git commit -m \"mod\" && git push && npm version patch && npm publish --access public",
+		"start": "npm run build && node dist/cli.js"
+	},
+	"files": [
+		"dist"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/thinairthings/cli.git"
+	},
+	"dependencies": {
+		"@commander-js/extra-typings": "^12.0.1",
+		"@pulumi/aws": "^6.28.1",
+		"@pulumi/github": "^6.2.0",
+		"@pulumi/pulumi": "^3.112.0",
+		"@tqman/ink-table": "^0.0.0-development",
+		"dedent": "^1.5.1",
+		"immer": "^10.0.4",
+		"ink": "^4.4.1",
+		"ink-markdown": "^1.0.4",
+		"ink-select-input": "^5.0.0",
+		"ink-spinner": "^5.0.0",
+		"ink-text-input": "^5.0.1",
+		"react": "^18.2.0",
+		"zustand": "^4.5.2"
+	},
+	"devDependencies": {
+		"@sindresorhus/tsconfig": "^3.0.1",
+		"@types/ink-divider": "^2.0.4",
+		"@types/node": "^20.11.30",
+		"@types/react": "^18.0.32",
+		"@vdemedes/prettier-config": "^2.0.1",
+		"chalk": "^5.2.0",
+		"ts-node": "^10.9.1",
+		"tsup": "^8.0.2",
+		"typescript": "^5.0.3"
+	}
+}

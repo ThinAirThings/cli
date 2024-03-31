@@ -1,0 +1,29 @@
+{
+  "name": "@grantgraph/automation-test-stack",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "npmpub": "npm run build && git add . && git commit -m \"mod\" && git push && npm version patch && npm publish --access public",
+    "format": "npx prettier --write ."
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grantgraph/automation-test-stack.git"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.134",
+    "@types/node": "20.6.3",
+    "tsup": "^7.2.0",
+    "typescript": "~5.2.2"
+  },
+  "peerDependencies": {
+    "@pulumi/aws": "^6.0.0",
+    "@pulumi/pulumi": "^3.103.1"
+  },
+  "dependencies": {}
+}
