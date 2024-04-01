@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useState } from "react"
 import { getThinairConfig, getThinairConfigPath } from "../(libs)/utils/getThinairConfig.js"
 import { writeFileSync } from "fs"
-import { useImmer } from "use-immer"
 import { ThinairConfig } from "../(types)/ThinairConfig.js"
-
+import { useImmer } from "@thinairthings/use-immer"
 
 
 export const useThinairConfig = () => {

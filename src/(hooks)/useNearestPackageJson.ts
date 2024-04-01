@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import path from "path";
 import fs, { writeFileSync } from "fs";
 import { PackageJson } from "../(types)/PackageJson.js";
-import { useImmer } from "use-immer";
+import { useImmer } from "@thinairthings/use-immer";
 import { FindPackageJsonResult, findPackageJson } from "../(libs)/utils/findPackageJson.js";
 import { Package } from "@pulumi/aws/opensearch/index.js";
 

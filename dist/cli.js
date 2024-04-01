@@ -6,7 +6,7 @@ import { program as program2 } from "@commander-js/extra-typings";
 // package.json
 var package_default = {
   name: "@thinairthings/cli",
-  version: "0.0.1",
+  version: "1.0.1",
   license: "MIT",
   bin: {
     thinair: "dist/cli.js"
@@ -36,6 +36,7 @@ var package_default = {
     "@pulumi/aws": "^6.28.1",
     "@pulumi/github": "^6.2.0",
     "@pulumi/pulumi": "^3.112.0",
+    "@thinairthings/use-immer": "^0.9.1",
     "@tqman/ink-table": "^0.0.0-development",
     dedent: "^1.5.1",
     immer: "^10.0.4",
@@ -47,7 +48,6 @@ var package_default = {
     lodash: "^4.17.21",
     react: "^18.2.0",
     "react-nil": "^1.2.0",
-    "use-immer": "^0.9.0",
     zustand: "^4.5.2"
   },
   devDependencies: {
@@ -67,6 +67,9 @@ var package_default = {
     "ts-node": "^10.9.1",
     tsup: "^8.0.2",
     typescript: "^5.0.3"
+  },
+  publishConfig: {
+    access: "public"
   },
   release: {
     branches: [
@@ -729,7 +732,7 @@ import SelectInput from "ink-select-input";
 // src/(hooks)/useThinairConfig.ts
 import { useEffect as useEffect3 } from "react";
 import { writeFileSync as writeFileSync2 } from "fs";
-import { useImmer } from "use-immer";
+import { useImmer } from "@thinairthings/use-immer";
 var useThinairConfig = () => {
   const [config, updateConfig] = useImmer(getThinairConfig());
   useEffect3(() => {
@@ -856,7 +859,7 @@ import { useEffect as useEffect8, useState as useState5 } from "react";
 // src/(hooks)/useNearestPackageJson.ts
 import { useEffect as useEffect5, useMemo } from "react";
 import { writeFileSync as writeFileSync4 } from "fs";
-import { useImmer as useImmer2 } from "use-immer";
+import { useImmer as useImmer2 } from "@thinairthings/use-immer";
 
 // src/(libs)/utils/findPackageJson.ts
 import path4 from "path";

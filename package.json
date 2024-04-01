@@ -30,6 +30,7 @@
     "@pulumi/aws": "^6.28.1",
     "@pulumi/github": "^6.2.0",
     "@pulumi/pulumi": "^3.112.0",
+    "@thinairthings/use-immer": "^0.9.1",
     "@tqman/ink-table": "^0.0.0-development",
     "dedent": "^1.5.1",
     "immer": "^10.0.4",
@@ -41,7 +42,6 @@
     "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-nil": "^1.2.0",
-    "use-immer": "^0.9.0",
     "zustand": "^4.5.2"
   },
   "devDependencies": {
