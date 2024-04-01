@@ -3,9 +3,11 @@
 	"compilerOptions": {
 		"outDir": "dist",
 		"noUnusedLocals": false,
-		"resolveJsonModule": true
+		"resolveJsonModule": true,
+		"target": "esnext"
 	},
 	"include": [
-		"src"
+		"src",
+		"archive/raizer"
 	]
 }

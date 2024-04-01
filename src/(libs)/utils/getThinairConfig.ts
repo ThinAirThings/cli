@@ -1,19 +1,13 @@
 import { readFileSync } from "fs"
 import path from "path"
 import os from "os"
+import { ThinairConfig } from "../../(types)/ThinairConfig.js"
 
 
-export type ThinAirConfig = {
-    organizations: {
-        [key: string]: {
-            githubToken: string
-        }
-    },
-    defaultOrganization: string
-}
+
 
 export const getThinairConfig = () => {
-    return JSON.parse(readFileSync(path.join(os.homedir(), '.thinair', 'config')).toString()) as ThinAirConfig
+    return JSON.parse(readFileSync(path.join(os.homedir(), '.thinair', 'config')).toString()) as ThinairConfig
 }
 
 export const getThinairConfigPath = () => {

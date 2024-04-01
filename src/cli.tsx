@@ -2,16 +2,15 @@
 import { program } from '@commander-js/extra-typings';
 
 import packageJson from '../package.json';
-import { createConfigCommand } from './config/createConfigCommand.js';
-import { createGithubCommand } from './github/createGithubCommand.js';
+import { organizationsCommand } from './organizations/organizationsCommand.js';
+import { githubCommand } from './github/githubCommand.js';
 import chalk from 'chalk';
 import path from 'path';
 import os from 'os';
 import { existsSync, mkdirSync, writeFileSync } from 'fs';
 import { Text, render } from 'ink';
 import React from 'react';
-import { CreateOrganization, useCreateOrganizationStore } from './config/create-organization/CreateOrganization.js';
-
+import { CreateOrganization, useCreateOrganizationStore } from './organizations/create/CreateOrganization.js';
 
 
 const parts = packageJson.version.split('.').map(Number);
@@ -20,7 +19,7 @@ program
 	.name('thinair')
 	.version(version)
 	// Add hooks
-	.hook('preSubcommand', async (thisCommand, actionCommand) => {
+	.hook('preSubcommand', async () => {
 		console.log(chalk.cyan(`🚀 Thinair CLI ${version}`))
 		const thinairPath = path.join(os.homedir(), '.thinair')
 		if (!existsSync(thinairPath)) {
@@ -41,10 +40,10 @@ program
 			})
 		}
 	})
-// Config Command
-createConfigCommand(program)
+// Organizations Command
+organizationsCommand(program)
 
 // Github Command
-createGithubCommand(program)
+githubCommand(program)
 
 program.parse()
