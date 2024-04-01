@@ -8,6 +8,7 @@ import { Package } from "@pulumi/aws/opensearch/index.js";
 
 
 
+
 export const useNearestPackageJson = (startingPath: string) => {
     const packageJsonResult = useMemo(() => findPackageJson(startingPath), [startingPath])
     const [packageJson, updatePackageJson] = useImmer<PackageJson | null>(packageJsonResult?.packageJsonObj ?? null)
