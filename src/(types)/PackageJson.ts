@@ -16,6 +16,10 @@ export type PackageJson = {
     browser?: string | { [key: string]: string | false };
     bin?: { [key: string]: string } | string;
     man?: string | string[];
+    release?: {
+        branches?: string[];
+        plugins?: string[];
+    }
     directories?: {
         lib?: string;
         bin?: string;
