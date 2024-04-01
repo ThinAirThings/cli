@@ -6,7 +6,7 @@ import { program as program2 } from "@commander-js/extra-typings";
 // package.json
 var package_default = {
   name: "@thinairthings/cli",
-  version: "1.0.1",
+  version: "1.0.2",
   license: "MIT",
   bin: {
     thinair: "dist/cli.js"
