@@ -13,7 +13,6 @@ import React from 'react';
 import { CreateOrganization, useCreateOrganizationStore } from './organizations/create/CreateOrganization.js';
 
 
-
 const parts = packageJson.version.split('.').map(Number);
 const version = `${parts[0]}.${parts[1]}.${parts[2]! + 1}`;
 program
