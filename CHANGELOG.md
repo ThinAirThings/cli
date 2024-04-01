@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/thinairthings/cli/compare/v1.0.0...v1.0.1) (2024-04-01)
+
+
+### Bug Fixes
+
+* **release:** pulled ([01df253](https://github.com/thinairthings/cli/commit/01df253534bc51e3dc7fe810a60140aae46351db))
+
 # 1.0.0 (2024-04-01)
 
 
