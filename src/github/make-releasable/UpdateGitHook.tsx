@@ -15,9 +15,10 @@ export const UpdateGit: FC<{
                 fs.accessSync(potentialPath)
                 console.log(chalk.green('🌲  Found .git folder.'))
                 writeFileSync(path.join(potentialPath, 'hooks', 'prepare-commit-msg'), `
-                    #!/bin/bash
-                    exec < /dev/tty && node_modules/.bin/cz --hook || true
-                `.trim())
+#!/bin/bash
+exec < /dev/tty && node_modules/.bin/cz --hook || true
+`.trim())
+                fs.chmodSync(path.join(potentialPath, 'hooks', 'prepare-commit-msg'), '755')
                 console.log(chalk.green('✅  Updated prepare-commit-msg hook.'))
             } catch (e) {
                 // Error means file doesn't exist at potentialPath, move up
