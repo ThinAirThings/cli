@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/thinairthings/cli/compare/v1.0.3...v1.0.4) (2024-04-01)
+
+
+### Bug Fixes
+
+* **release:** checking why commit is happening twice ([ae54661](https://github.com/thinairthings/cli/commit/ae54661397694c83573005422c91842ebce24850))
+
 ## [1.0.3](https://github.com/thinairthings/cli/compare/v1.0.2...v1.0.3) (2024-04-01)
 
 
