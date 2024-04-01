@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/thinairthings/cli/compare/v1.0.1...v1.0.2) (2024-04-01)
+
+
+### Bug Fixes
+
+* **release:** make public in package.json ([adf1dfe](https://github.com/thinairthings/cli/commit/adf1dfe3b4863a42cb361cd6e8003141dbd10ded))
+
 ## [1.0.1](https://github.com/thinairthings/cli/compare/v1.0.0...v1.0.1) (2024-04-01)
 
 
