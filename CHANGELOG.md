@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/thinairthings/cli/compare/v1.0.4...v1.0.5) (2024-04-01)
+
+
+### Bug Fixes
+
+* **release:** fixing double dommit ([0860dbf](https://github.com/thinairthings/cli/commit/0860dbf3390cd9d5d5b59c578ae5a4b471cd230a))
+
 ## [1.0.4](https://github.com/thinairthings/cli/compare/v1.0.3...v1.0.4) (2024-04-01)
 
 
