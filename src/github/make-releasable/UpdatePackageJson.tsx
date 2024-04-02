@@ -13,9 +13,11 @@ import { CreateGithubWorkflow } from "./CreateGithubWorkflow.js"
 
 
 export const UpdatePackageJson: FC<{
-    libraryPath: string
+    libraryPath: string,
+    publishToNpm: boolean
 }> = ({
-    libraryPath
+    libraryPath,
+    publishToNpm
 }) => {
         const [packageJson, updatePackageJson] = useNearestPackageJson(libraryPath)
         const [installationState, setInstallationState] = useState<
@@ -33,15 +35,14 @@ export const UpdatePackageJson: FC<{
                 if (draft === null) return
                 _.set(draft, 'scripts', {
                     ...draft.scripts,
-                    "prepublishOnly": "npm run build",
-                    "commit": "npx cz"
+                    ...publishToNpm ? { "prepublishOnly": "npm run build" } : {},
                 })
                 _.set(draft, 'devDependencies', {
                     ...draft.devDependencies,
                     "@semantic-release/changelog": "^6.0.3",
                     "@semantic-release/git": "^10.0.1",
                     "@semantic-release/github": "^10.0.2",
-                    "@semantic-release/npm": "^12.0.0",
+                    ...publishToNpm ? { "@semantic-release/npm": "^12.0.0" } : {},
                     "cz-conventional-changelog": "^3.3.0",
                     "semantic-release": "^23.0.6",
                 })
@@ -52,7 +53,7 @@ export const UpdatePackageJson: FC<{
                     "@semantic-release/commit-analyzer",
                     "@semantic-release/release-notes-generator",
                     "@semantic-release/changelog",
-                    "@semantic-release/npm",
+                    ...publishToNpm ? ["@semantic-release/npm"] : [],
                     "@semantic-release/git"
                 ])
             })
@@ -91,7 +92,7 @@ export const UpdatePackageJson: FC<{
             </Box>}
             {installationState === 'installationComplete' && <>
                 <UpdateGit libraryPath={libraryPath} />
-                <CreateGithubWorkflow libraryPath={libraryPath} />
+                <CreateGithubWorkflow libraryPath={libraryPath} publishToNpm={publishToNpm} />
             </>}
         </>)
     }

@@ -6,7 +6,7 @@ import { program as program2 } from "@commander-js/extra-typings";
 // package.json
 var package_default = {
   name: "@thinairthings/cli",
-  version: "1.0.2",
+  version: "1.0.4",
   license: "MIT",
   bin: {
     thinair: "dist/cli.js"
@@ -79,7 +79,6 @@ var package_default = {
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
       "@semantic-release/changelog",
-      "@semantic-release/npm",
       "@semantic-release/git"
     ]
   },
@@ -853,6 +852,9 @@ import { Command as Command2 } from "@commander-js/extra-typings";
 import { render as render2 } from "ink";
 import React13 from "react";
 
+// src/github/make-releasable/MakeReleasable.tsx
+import { useState as useState6 } from "react";
+
 // src/github/make-releasable/UpdatePackageJson.tsx
 import { useEffect as useEffect8, useState as useState5 } from "react";
 
@@ -937,7 +939,7 @@ exec < /dev/tty && node_modules/.bin/cz --hook || true
 import path6 from "path";
 import React10, { useEffect as useEffect7 } from "react";
 import fs4 from "fs";
-var CreateGithubWorkflow = ({ libraryPath }) => {
+var CreateGithubWorkflow = ({ libraryPath, publishToNpm }) => {
   useEffect7(() => {
     const workflowPath = path6.join(libraryPath, ".github", "workflows", "release.yml");
     fs4.mkdirSync(path6.dirname(workflowPath), { recursive: true });
@@ -975,7 +977,7 @@ jobs:
       - name: Release
         env:
           GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: \${{ secrets.NPM_TOKEN }}
+          ${publishToNpm ? `NPM_TOKEN: \${{ secrets.NPM_TOKEN }}` : ""}
         run: npx semantic-release
 `.trim()
     );
@@ -986,7 +988,8 @@ jobs:
 
 // src/github/make-releasable/UpdatePackageJson.tsx
 var UpdatePackageJson = ({
-  libraryPath
+  libraryPath,
+  publishToNpm
 }) => {
   const [packageJson, updatePackageJson] = useNearestPackageJson(libraryPath);
   const [installationState, setInstallationState] = useState5("idle");
@@ -1000,15 +1003,14 @@ var UpdatePackageJson = ({
         return;
       _.set(draft, "scripts", {
         ...draft.scripts,
-        "prepublishOnly": "npm run build",
-        "commit": "npx cz"
+        ...publishToNpm ? { "prepublishOnly": "npm run build" } : {}
       });
       _.set(draft, "devDependencies", {
         ...draft.devDependencies,
         "@semantic-release/changelog": "^6.0.3",
         "@semantic-release/git": "^10.0.1",
         "@semantic-release/github": "^10.0.2",
-        "@semantic-release/npm": "^12.0.0",
+        ...publishToNpm ? { "@semantic-release/npm": "^12.0.0" } : {},
         "cz-conventional-changelog": "^3.3.0",
         "semantic-release": "^23.0.6"
       });
@@ -1019,7 +1021,7 @@ var UpdatePackageJson = ({
         "@semantic-release/commit-analyzer",
         "@semantic-release/release-notes-generator",
         "@semantic-release/changelog",
-        "@semantic-release/npm",
+        ...publishToNpm ? ["@semantic-release/npm"] : [],
         "@semantic-release/git"
       ]);
     });
@@ -1049,15 +1051,32 @@ var UpdatePackageJson = ({
       });
     });
   }, [packageJson, installationState]);
-  return /* @__PURE__ */ React11.createElement(React11.Fragment, null, installationState === "installingDependencies" && /* @__PURE__ */ React11.createElement(Box5, null, /* @__PURE__ */ React11.createElement(Text5, { color: "green" }, /* @__PURE__ */ React11.createElement(Spinner, { type: "dots" })), /* @__PURE__ */ React11.createElement(Text5, null, " Installing Dependencies...")), installationState === "initializingCommitizen" && /* @__PURE__ */ React11.createElement(Box5, null, /* @__PURE__ */ React11.createElement(Text5, { color: "green" }, /* @__PURE__ */ React11.createElement(Spinner, { type: "dots" })), /* @__PURE__ */ React11.createElement(Text5, null, " Initializing Commitizen...")), installationState === "installationComplete" && /* @__PURE__ */ React11.createElement(React11.Fragment, null, /* @__PURE__ */ React11.createElement(UpdateGit, { libraryPath }), /* @__PURE__ */ React11.createElement(CreateGithubWorkflow, { libraryPath })));
+  return /* @__PURE__ */ React11.createElement(React11.Fragment, null, installationState === "installingDependencies" && /* @__PURE__ */ React11.createElement(Box5, null, /* @__PURE__ */ React11.createElement(Text5, { color: "green" }, /* @__PURE__ */ React11.createElement(Spinner, { type: "dots" })), /* @__PURE__ */ React11.createElement(Text5, null, " Installing Dependencies...")), installationState === "initializingCommitizen" && /* @__PURE__ */ React11.createElement(Box5, null, /* @__PURE__ */ React11.createElement(Text5, { color: "green" }, /* @__PURE__ */ React11.createElement(Spinner, { type: "dots" })), /* @__PURE__ */ React11.createElement(Text5, null, " Initializing Commitizen...")), installationState === "installationComplete" && /* @__PURE__ */ React11.createElement(React11.Fragment, null, /* @__PURE__ */ React11.createElement(UpdateGit, { libraryPath }), /* @__PURE__ */ React11.createElement(CreateGithubWorkflow, { libraryPath, publishToNpm })));
 };
 
 // src/github/make-releasable/MakeReleasable.tsx
 import React12 from "react";
+import SelectInput3 from "ink-select-input";
+import { Text as Text6 } from "ink";
 var MakeReleasable = ({
   libraryPath
 }) => {
-  return /* @__PURE__ */ React12.createElement(UpdatePackageJson, { libraryPath });
+  const [publishToNpm, setPublishToNpm] = useState6("notSet");
+  return /* @__PURE__ */ React12.createElement(React12.Fragment, null, publishToNpm === "notSet" ? /* @__PURE__ */ React12.createElement(React12.Fragment, null, /* @__PURE__ */ React12.createElement(Text6, null, "Do you want to build and publish this repo to NPM?"), /* @__PURE__ */ React12.createElement(
+    SelectInput3,
+    {
+      items: [{
+        label: "Yes",
+        value: true
+      }, {
+        label: "No",
+        value: false
+      }],
+      onSelect: (item) => {
+        setPublishToNpm(item.value);
+      }
+    }
+  )) : /* @__PURE__ */ React12.createElement(UpdatePackageJson, { libraryPath, publishToNpm }));
 };
 
 // src/github/githubCommand.tsx
@@ -1075,7 +1094,7 @@ var githubCommand = (program3) => {
 import path7 from "path";
 import os5 from "os";
 import { existsSync as existsSync2, mkdirSync as mkdirSync2, writeFileSync as writeFileSync6 } from "fs";
-import { Text as Text6, render as render3 } from "ink";
+import { Text as Text7, render as render3 } from "ink";
 import React14 from "react";
 var parts = package_default.version.split(".").map(Number);
 var version = `${parts[0]}.${parts[1]}.${parts[2] + 1}`;
@@ -1089,7 +1108,7 @@ program2.name("thinair").version(version).hook("preSubcommand", async () => {
     writeFileSync6(configPath, JSON.stringify({
       organizations: {}
     }, null, 2));
-    render3(/* @__PURE__ */ React14.createElement(React14.Fragment, null, /* @__PURE__ */ React14.createElement(Text6, null, "Looks like you have no organizations setup. Lets fix that!"), /* @__PURE__ */ React14.createElement(CreateOrganization, null)));
+    render3(/* @__PURE__ */ React14.createElement(React14.Fragment, null, /* @__PURE__ */ React14.createElement(Text7, null, "Looks like you have no organizations setup. Lets fix that!"), /* @__PURE__ */ React14.createElement(CreateOrganization, null)));
     await new Promise((resolve) => {
       useCreateOrganizationStore.subscribe((state) => {
         if (state.complete)

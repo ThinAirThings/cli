@@ -1,6 +1,5 @@
 import { Command, Option } from "@commander-js/extra-typings";
 import { render } from "ink";
-import { PackageJson } from "./create-repo/components/PackageJson.js";
 import React from "react";
 import { MakeReleasable } from "./make-releasable/MakeReleasable.js";
 

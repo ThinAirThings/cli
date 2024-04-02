@@ -4,13 +4,14 @@ import fs from "fs";
 import chalk from "chalk";
 
 export const CreateGithubWorkflow: FC<{
-    libraryPath: string;
-}> = ({ libraryPath }) => {
-    useEffect(() => {
-        const workflowPath = path.join(libraryPath, ".github", "workflows", "release.yml");
-        fs.mkdirSync(path.dirname(workflowPath), { recursive: true });
-        fs.writeFileSync(
-            workflowPath,
+  libraryPath: string;
+  publishToNpm: boolean;
+}> = ({ libraryPath, publishToNpm }) => {
+  useEffect(() => {
+    const workflowPath = path.join(libraryPath, ".github", "workflows", "release.yml");
+    fs.mkdirSync(path.dirname(workflowPath), { recursive: true });
+    fs.writeFileSync(
+      workflowPath,
       /* yaml */ `
 name: Release
 on:
@@ -42,12 +43,12 @@ jobs:
       - name: Release
         env:
           GITHUB_TOKEN: $\{{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: $\{{ secrets.NPM_TOKEN }}
+          ${publishToNpm ? `NPM_TOKEN: $\{{ secrets.NPM_TOKEN }}` : ''}
         run: npx semantic-release
 `.trim()
-        );
-        console.log(chalk.green("🚀  Created .github/workflows/release.yml"))
-    }, []);
+    );
+    console.log(chalk.green("🚀  Created .github/workflows/release.yml"))
+  }, []);
 
-    return <></>;
+  return <></>;
 };
