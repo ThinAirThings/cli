@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/thinairthings/cli/compare/v1.0.5...v1.1.0) (2024-04-02)
+
+
+### Features
+
+* **makereleasable:** add npm publish input selection ([a0281fc](https://github.com/thinairthings/cli/commit/a0281fc48557aef72a806533f2a071aa85111c14))
+
 ## [1.0.5](https://github.com/thinairthings/cli/compare/v1.0.4...v1.0.5) (2024-04-01)
 
 
