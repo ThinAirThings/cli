@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/thinairthings/cli/compare/v1.1.0...v1.2.0) (2024-04-02)
+
+
+### Features
+
+* **updatepackagejson:** add release branches [next, beta] ([3b636d9](https://github.com/thinairthings/cli/commit/3b636d9a173eb3143432c20cddae122deaed7673))
+
 # [1.1.0](https://github.com/thinairthings/cli/compare/v1.0.5...v1.1.0) (2024-04-02)
 
 
