@@ -47,7 +47,9 @@ export const UpdatePackageJson: FC<{
                     "semantic-release": "^23.0.6",
                 })
                 _.set(draft, 'release.branches', [
-                    "main"
+                    "main",
+                    "next",
+                    { "name": "beta", "prerelease": true }
                 ])
                 _.set(draft, 'release.plugins', [
                     "@semantic-release/commit-analyzer",
