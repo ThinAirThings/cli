@@ -18,6 +18,8 @@ on:
   push:
     branches:
       - main
+      - next
+      - beta
 
 permissions:
   contents: read # for checkout
