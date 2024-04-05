@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/thinairthings/cli/compare/v1.2.0...v1.2.1) (2024-04-05)
+
+
+### Bug Fixes
+
+* **creategithubworkflow:** add next and main to release.yml write ([94eee8f](https://github.com/thinairthings/cli/commit/94eee8fe0eaf4b68ddbb66ed26543ca1f39c2b85))
+
 # [1.2.0](https://github.com/thinairthings/cli/compare/v1.1.0...v1.2.0) (2024-04-02)
 
 
