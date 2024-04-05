@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/thinairthings/cli/compare/v1.2.1...v1.2.2) (2024-04-05)
+
+
+### Bug Fixes
+
+* **package.json:** update release branches ([3c12d38](https://github.com/thinairthings/cli/commit/3c12d38f5a6a7e462e9c0efee903da2524984087))
+
 ## [1.2.1](https://github.com/thinairthings/cli/compare/v1.2.0...v1.2.1) (2024-04-05)
 
 
